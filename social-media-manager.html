@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI Social Media Manager — 53 Prompts Bundle ($9.99)</title>
+<meta name="description" content="53 done-for-you ChatGPT prompts that create viral content on autopilot. Instant download, pay with USDT or BTC.">
+<meta property="og:title" content="AI Social Media Manager — 53 Prompts Bundle ($9.99)">
+<meta property="og:description" content="53 done-for-you ChatGPT prompts that create viral content on autopilot">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+a{color:#667eea}
+h1{font-size:2.4em;margin:16px 0;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
+.subtitle{text-align:center;color:#aaa;font-size:1.1em;margin-bottom:32px}
+.price-box{text-align:center;margin:32px 0;padding:28px;background:#13131a;border-radius:16px;border:2px solid #667eea}
+.price{font-size:3em;font-weight:bold;color:#667eea}
+.was{color:#888;text-decoration:line-through;font-size:1.2em}
+.features{background:#0f0f18;border-radius:12px;padding:28px;margin:24px 0}
+.features h2{color:#fff;margin-bottom:16px;text-align:center}
+.features ul{list-style:none}
+.features li{padding:10px 0;border-bottom:1px solid #1e1e2a;color:#ccc}
+.features li:before{content:"✅ ";margin-right:8px}
+.pay-box{text-align:center;margin:32px 0;padding:28px;background:#13131a;border-radius:16px;border:1px solid #1e1e2a}
+.pay-btn{display:inline-block;padding:14px 40px;background:#667eea;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:1.1em;margin:8px}
+.pay-btn:hover{background:#5a6dd8}
+.secure{color:#666;font-size:.85em;margin-top:12px}
+.cta{text-align:center;margin:40px 0}
+.cta a{color:#667eea}
+.nav{text-align:center;padding:16px 0;border-bottom:1px solid #1e1e2a;margin-bottom:30px}
+.nav a{color:#888;margin:0 12px;text-decoration:none}
+.nav a:hover{color:#667eea}
+footer{text-align:center;padding:30px;color:#555;border-top:1px solid #1e1e2a;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">🏪 Store</a><a href="blog.html">📝 Blog</a><a href="social-media-manager.html">📱 Social Media</a><a href="content-factory.html">🏭 Content Factory</a><a href="business-automation.html">⚙️ Automation</a><a href="bundle.html">🎁 Bundle</a></div>
+<div class="container">
+<h1>AI Social Media Manager</h1>
+<p class="subtitle">53 done-for-you ChatGPT prompts that create viral content on autopilot</p>
+<div class="price-box ">
+<div class="price">$9.99</div>
+
+<p style="color:#888;margin-top:8px">One-time payment • Instant delivery • Lifetime updates</p>
+</div>
+<div class="features">
+<h2>What You Get</h2>
+<ul>
+<li>53 ready-to-use prompts in 12 categories</li>
+<li>Content ideas generator for any niche</li>
+<li>Hook &amp; headline formulas that stop the scroll</li>
+<li>Hashtag strategy &amp; SEO templates</li>
+<li>Engagement &amp; reply scripts for comments/DMs</li>
+<li>Platform-specific: Instagram, LinkedIn, X, TikTok</li>
+<li>Video scripts for Reels/TikTok/Shorts</li>
+<li>Analytics prompts to grow your accounts</li>
+<li>Crisis management &amp; brand safety templates</li>
+<li>Bonus: prompt engineering tips</li>
+</ul>
+<p style="color:#666;margin-top:16px;text-align:center">📦 1× ZIP with JSON prompts file + README</p>
+</div>
+<div class="pay-box">
+<h3 style="color:#fff;margin-bottom:8px">Get It Now</h3>
+<a href="#" class="pay-btn" onclick="orderNow()">Buy Now</a>
+<p style="color:#666;margin-top:12px">Pay with USDT (TRC-20) or BTC</p>
+<p class="secure">🔒 Secure checkout • Instant download link after payment</p>
+</div>
+<div class="cta"><a href="blog.html">📝 Read our blog for free AI tips</a></div>
+</div>
+<footer><p>ToptodayAI © 2026 — <a href="index.html">Store</a> | <a href="blog.html">Blog</a> | <a href="https://toptoday.pw">toptoday.pw</a></p></footer>
+<script>
+const PRODUCT_ID = "AI Social Media Manager ($9.99)";
+const PRICE = 9.99;
+const USDT = 'TFdNyE29jYyLy1hCdU8hB5N8c6iKwqY1rJ';
+const BTC = 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh';
+const ORDER_API = 'https://toptoday.pw/api/order';
+function orderNow() {
+    const email = prompt('Enter your email for delivery:');
+    if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+    fetch(ORDER_API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({product: PRODUCT_ID, price: PRICE, email: email, time: new Date().toISOString()})
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.status === 'ok') {
+            alert(`✅ Order #${data.order_id} received!\n\nPay ${PRICE} USDT to:\n${USDT}\n\nSend exact amount. After confirmation you will receive your download link.`);
+            window.open('https://tron.tronscan.org/#/address/' + USDT, '_blank');
+        } else {
+            alert('Error: ' + JSON.stringify(data));
+        }
+    })
+    .catch(e => alert('Network error: ' + e));
+}
+</script>
+</body>
+</html>

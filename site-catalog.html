@@ -4,296 +4,533 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TopToDayAI — Каталог услуг (v2)</title>
-<meta name="description" content="Каталог услуг TopToDayAI: SEO, разработка, автоматизация, контент, engagement. Реальные цены и условия. v2 — данные из NocoDB.">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0d12;color:#e7e7ed;line-height:1.6}
-.container{max-width:1180px;margin:0 auto;padding:24px}
-header{padding:26px 0;border-bottom:1px solid #22222c;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.logo{font-size:1.5rem;font-weight:800;color:#fff}.logo span{color:#667eea}
-.lang a{color:#9a9aa8;text-decoration:none;margin-left:10px;padding:6px 12px;border:1px solid #22222c;border-radius:8px}
-.lang a.active{color:#fff;border-color:#667eea;background:#13131a}
-.hero{margin:26px 0 8px}
-h1{font-size:2.1rem;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
-.lead{color:#9a9aa8;max-width:820px}
-.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0}
-.search input{background:#13131a;border:1px solid #22222c;color:#e7e7ed;padding:10px 14px;border-radius:10px;min-width:260px;outline:none}
-.search input:focus{border-color:#667eea}
-.filters{display:flex;gap:8px;flex-wrap:wrap}
-.fbtn{background:#13131a;border:1px solid #22222c;color:#b8b8c4;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:.85rem}
-.fbtn.active{background:#1a1a2e;border-color:#667eea;color:#cad4ff}
-.category{margin:30px 0 14px;font-size:1.4rem;color:#fff;padding-bottom:8px;border-bottom:1px solid #22222c}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-.card{background:#13131a;border:1px solid #22222c;border-radius:16px;padding:22px;display:flex;flex-direction:column;transition:.25s}
-.card:hover{border-color:#667eea}
-.card .cat{font-size:.75rem;color:#667eea;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
-.card h3{color:#fff;font-size:1.15rem;margin-bottom:4px}
-.price{font-size:1.9rem;font-weight:800;color:#667eea;margin:8px 0 4px}
-.tags{margin:10px 0}
-.tag{display:inline-block;padding:3px 10px;border-radius:14px;font-size:.7rem;margin:2px 4px 2px 0;background:#1a1a2e;color:#667eea;border:1px solid #334}
-.tag.hint{color:#9a9aa8;background:#13131a}
-.cta{display:block;text-align:center;background:#667eea;color:#fff;text-decoration:none;padding:13px 16px;border-radius:10px;font-weight:700;margin-top:auto}
-.cta.brief{background:#1e1e2a;border:1px solid #667eea;color:#cad4ff}
-.cta.escalate{background:#f43f5e}
-.cta:hover{opacity:.88}
-.disclaimer{font-size:.78rem;color:#f0c040;border:1px dashed #5a4a1c;background:#151510;border-radius:8px;padding:8px 10px;margin-top:10px}
-.stats{display:flex;gap:20px;flex-wrap:wrap;color:#9a9aa8;font-size:.9rem;margin:10px 0 4px}
+<meta name="description" content="Каталог услуг TopToDayAI: SEO, разработка сайтов, автоматизация на n8n, Telegram-боты, AI-агенты, видео, engagement. Реальные цены. Данные из NocoDB.">
+<style>*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0d12;--card:#13131a;--line:#22222c;--txt:#e7e7ed;--muted:#9a9aa8;--acc:#667eea;--acc2:#764ba2;--danger:#f43f5e;--warn:#f0c040}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;z-index:50;background:rgba(11,13,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px 0}
+.hbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-size:1.4rem;font-weight:800;color:#fff;text-decoration:none}.logo span{color:var(--acc)}
+.lang{display:flex;gap:6px}
+.lang button{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.85rem}
+.lang button.active{color:#fff;border-color:var(--acc);background:#1a1a2e}
+.hero{padding:40px 0 8px}
+h1{font-size:2.2rem;line-height:1.2;background:linear-gradient(135deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.lead{color:var(--muted);max-width:860px;font-size:1.02rem}
+.stats{display:flex;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:.92rem;margin:14px 0 4px}
 .stats b{color:#fff}
-footer{border-top:1px solid #22222c;margin-top:40px;padding:20px 0;color:#6a6a78;font-size:.85rem;text-align:center}
-.empty{color:#9a9aa8;padding:40px;text-align:center;display:none}
-a{color:#667eea}
-</style>
+.toolbar{position:sticky;top:57px;z-index:40;background:rgba(11,13,18,.94);backdrop-filter:blur(6px);padding:14px 0;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.search{flex:1;min-width:240px}
+.search input{width:100%;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:11px 14px;border-radius:10px;outline:none;font-size:.92rem}
+.search input:focus{border-color:var(--acc)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.fbtn{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:8px 14px;border-radius:20px;cursor:pointer;font-size:.84rem;transition:.2s}
+.fbtn:hover{color:#fff}
+.fbtn.active{background:#1a1a2e;border-color:var(--acc);color:#cad4ff}
+main{padding:8px 0 20px}
+.category{margin:32px 0 14px;font-size:1.35rem;color:#fff;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;transition:.22s}
+.card:hover{border-color:var(--acc);transform:translateY(-2px)}
+.card .cat{font-size:.72rem;color:var(--acc);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.card h3{color:#fff;font-size:1.14rem;margin-bottom:2px}
+.card .en{color:var(--muted);font-size:.85rem;margin-bottom:6px}
+.price{font-size:1.85rem;font-weight:800;color:var(--acc);margin:8px 0 4px}
+.price small{color:var(--muted);font-weight:500;font-size:.9rem}
+.tags{margin:10px 0}
+.tag{display:inline-block;padding:3px 10px;border-radius:14px;font-size:.7rem;margin:2px 4px 2px 0;background:#1a1a2e;color:var(--acc);border:1px solid #334}
+.tag.brief{color:var(--warn);border-color:#5a4a1c;background:#1a1a18}
+.tag.escalate{color:var(--danger);border-color:#5a1c2a}
+.tag.contact{color:#7dd3fc;border-color:#1a3a4a;background:#0f1a22}
+.tag.hint{color:var(--muted);background:var(--card)}
+.cta{display:block;text-align:center;background:var(--acc);color:#fff;text-decoration:none;padding:12px 16px;border-radius:10px;font-weight:700;margin-top:auto;cursor:pointer;border:none;font-size:.92rem;transition:.2s}
+.cta:hover{opacity:.88}
+.cta.brief{background:#1e1e2a;border:1px solid var(--acc);color:#cad4ff}
+.cta.escalate{background:var(--danger)}
+.cta.contact{background:#0e7490}
+.disclaimer{font-size:.78rem;color:var(--warn);border:1px dashed #5a4a1c;background:#151510;border-radius:8px;padding:8px 10px;margin-top:12px}
+.brief-form{display:none;background:#10101a;border:1px solid #2a2a3a;border-radius:12px;padding:18px;margin:20px 0}
+.brief-form.open{display:block}
+.brief-form h4{color:#fff;margin-bottom:10px}
+.brief-form input[type=text],.brief-form input[type=email],.brief-form textarea{width:100%;padding:10px;background:#1a1a25;border:1px solid #2c2c3a;border-radius:8px;color:var(--txt);margin:4px 0;font-family:inherit;font-size:.9rem;outline:none}
+.brief-form input:focus,.brief-form textarea:focus{border-color:var(--acc)}
+.brief-form label{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.88rem;margin:6px 0}
+.brief-form .note{font-size:.78rem;color:var(--muted);margin-top:8px}
+.empty{color:var(--muted);padding:40px;text-align:center;display:none}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 34px;color:#6a6a78;font-size:.85rem}
+footer a{color:var(--acc)}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#10101a;border:1px solid var(--acc);color:#fff;padding:12px 18px;border-radius:12px;font-size:.88rem;z-index:100;display:none;max-width:90vw;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+a{color:var(--acc)}</style>
 </head>
 <body>
-<div class="container">
 <header>
-  <div class="logo">TopTo<span>Day</span>AI</div>
-  <div class="lang"><a href="#" data-lang="ru" class="active">RU</a><a href="#" data-lang="en">EN</a></div>
+  <div class="container hbar">
+    <a class="logo" href="/">TopTo<span>Day</span>AI</a>
+    <div class="lang">
+      <button data-lang="ru" class="active">RU</button><button data-lang="en">EN</button>
+    </div>
+  </div>
 </header>
+<div class="container">
 <div class="hero">
   <h1>Каталог услуг TopToDayAI</h1>
-  <p class="lead">SEO-статьи, разработка сайтов, автоматизация на n8n, Telegram-боты, AI-агенты, видео и engagement. Данные каталога — из единого источника (NocoDB).</p>
-  <div class="stats"><span>Услуг: <b>22</b></span><span>Категорий: <b>12</b></span></div>
+  <p class="lead">SEO-статьи, разработка сайтов, автоматизация на n8n, Telegram-боты, AI-агенты, короткие видео и engagement. Данные каталога — из единого источника (NocoDB <code>services_website_catalog</code>), живой каталог: <a href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">toptoday.pw/site-catalog</a>.</p>
+  <div class="stats"><span>Услуг: <b>22</b></span><span>Категорий: <b>12</b></span><span>Сгенерировано: <b>2026-08-08 08:40 UTC</b></span></div>
 </div>
 <div class="toolbar">
   <div class="search"><input id="q" type="search" placeholder="Поиск услуги…"></div>
   <div class="filters" id="filters">
     <button class="fbtn active" data-f="all">Все</button>
-    <button class="fbtn" data-f="seo">SEO</button><button class="fbtn" data-f="автоматизация">Автоматизация</button><button class="fbtn" data-f="разработка">Разработка</button><button class="fbtn" data-f="контент">Контент</button><button class="fbtn" data-f="продвижение">Продвижение</button><button class="fbtn" data-f="seo-статьи">SEO-статьи</button><button class="fbtn" data-f="короткие видео / reels">Короткие видео / Reels</button><button class="fbtn" data-f="оформление профилей">Оформление профилей</button><button class="fbtn" data-f="контент-стратегия">Контент-стратегия</button><button class="fbtn" data-f="engagement-буст">Engagement-буст</button><button class="fbtn" data-f="seo продвижение">SEO продвижение</button><button class="fbtn" data-f="ai автоматизация">AI автоматизация</button>
+    <button class="fbtn" data-f="seo-статьи">SEO-статьи</button><button class="fbtn" data-f="seo продвижение">SEO продвижение</button><button class="fbtn" data-f="разработка">Разработка</button><button class="fbtn" data-f="автоматизация">Автоматизация</button><button class="fbtn" data-f="короткие видео / reels">Короткие видео / Reels</button><button class="fbtn" data-f="оформление профилей">Оформление профилей</button><button class="fbtn" data-f="контент-стратегия">Контент-стратегия</button><button class="fbtn" data-f="engagement-буст">Engagement-буст</button><button class="fbtn" data-f="seo">SEO</button><button class="fbtn" data-f="контент">Контент</button><button class="fbtn" data-f="продвижение">Продвижение</button><button class="fbtn" data-f="ai автоматизация">AI автоматизация</button>
   </div>
 </div>
 <main id="catalog">
-<section class="cat-section" data-cat-group="seo">
-  <h2 class="category">SEO</h2>
-  <div class="grid"><article class="card" data-cat="seo">
-  <div class="cat">SEO</div>
-  <h3 data-ru="SEO-статья" data-en="SEO Article">SEO-статья</h3>
-  <div class="price">$12</div>
-  <div class="tags"><span class="tag">gig</span><span class="tag hint">Оформление на бирже фриланса</span></div>
-
-  <a class="cta gig" href="https://kwork.ru" target="_blank" rel="noopener">Заказать →</a>
-</article></div>
-</section><section class="cat-section" data-cat-group="автоматизация">
-  <h2 class="category">Автоматизация</h2>
-  <div class="grid"><article class="card" data-cat="автоматизация">
-  <div class="cat">Автоматизация</div>
-  <h3 data-ru="Автоматизация n8n" data-en="n8n Automation">Автоматизация n8n</h3>
-  <div class="price">от $25</div>
-  <div class="tags"><span class="tag">brief</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
-
-  <a class="cta brief" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заполнить бриф →</a>
-</article><article class="card" data-cat="автоматизация">
-  <div class="cat">Автоматизация</div>
-  <h3 data-ru="n8n-автоматизация под бизнес" data-en="n8n workflow automation">n8n-автоматизация под бизнес</h3>
-  <div class="price">$299 / проект</div>
-  <div class="tags"><span class="tag">brief</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
-
-  <a class="cta brief" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заполнить бриф →</a>
-</article><article class="card" data-cat="автоматизация">
-  <div class="cat">Автоматизация</div>
-  <h3 data-ru="Telegram-бот для бизнеса" data-en="Telegram chatbot">Telegram-бот для бизнеса</h3>
-  <div class="price">$399 / проект</div>
-  <div class="tags"><span class="tag">brief</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
-
-  <a class="cta brief" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заполнить бриф →</a>
-</article><article class="card" data-cat="автоматизация">
-  <div class="cat">Автоматизация</div>
-  <h3 data-ru="Автопостинг контента" data-en="Auto content posting">Автопостинг контента</h3>
-  <div class="price">$199 / проект</div>
-  <div class="tags"><span class="tag">brief</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
-
-  <a class="cta brief" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заполнить бриф →</a>
-</article><article class="card" data-cat="автоматизация">
-  <div class="cat">Автоматизация</div>
-  <h3 data-ru="Парсинг данных в таблицы" data-en="Data scraping/parsing">Парсинг данных в таблицы</h3>
-  <div class="price">$249 / проект</div>
-  <div class="tags"><span class="tag">brief</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
-
-  <a class="cta brief" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заполнить бриф →</a>
-</article><article class="card" data-cat="автоматизация">
-  <div class="cat">Автоматизация</div>
-  <h3 data-ru="AI-агент под ключ" data-en="Custom AI agent">AI-агент под ключ</h3>
-  <div class="price">$599 / проект</div>
-  <div class="tags"><span class="tag">escalate</span><span class="tag hint">Индивидуальный проект / под ключ</span></div>
-
-  <a class="cta escalate" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Связаться →</a>
-</article></div>
-</section><section class="cat-section" data-cat-group="разработка">
-  <h2 class="category">Разработка</h2>
-  <div class="grid"><article class="card" data-cat="разработка">
-  <div class="cat">Разработка</div>
-  <h3 data-ru="Продающий лендинг" data-en="Landing Page">Продающий лендинг</h3>
-  <div class="price">от $49</div>
-  <div class="tags"><span class="tag">brief</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
-
-  <a class="cta brief" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заполнить бриф →</a>
-</article><article class="card" data-cat="разработка">
-  <div class="cat">Разработка</div>
-  <h3 data-ru="Продающий лендинг" data-en="High-converting landing">Продающий лендинг</h3>
-  <div class="price">$499 / проект</div>
-  <div class="tags"><span class="tag">brief</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
-
-  <a class="cta brief" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заполнить бриф →</a>
-</article><article class="card" data-cat="разработка">
-  <div class="cat">Разработка</div>
-  <h3 data-ru="Корпоративный сайт / сайт услуг" data-en="Business website">Корпоративный сайт / сайт услуг</h3>
-  <div class="price">$899 / проект</div>
-  <div class="tags"><span class="tag">escalate</span><span class="tag hint">Индивидуальный проект / под ключ</span></div>
-
-  <a class="cta escalate" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Связаться →</a>
-</article></div>
-</section><section class="cat-section" data-cat-group="контент">
-  <h2 class="category">Контент</h2>
-  <div class="grid"><article class="card" data-cat="контент">
-  <div class="cat">Контент</div>
-  <h3 data-ru="Короткие видео/Reels" data-en="Reels">Короткие видео/Reels</h3>
-  <div class="price">$18</div>
-  <div class="tags"><span class="tag">gig</span><span class="tag hint">Оформление на бирже фриланса</span></div>
-
-  <a class="cta gig" href="https://www.freelancer.com" target="_blank" rel="noopener">Заказать →</a>
-</article></div>
-</section><section class="cat-section" data-cat-group="продвижение">
-  <h2 class="category">Продвижение</h2>
-  <div class="grid"><article class="card" data-cat="продвижение">
-  <div class="cat">Продвижение</div>
-  <h3 data-ru="Engagement-буст" data-en="Engagement Boost">Engagement-буст</h3>
-  <div class="price">$10</div>
-  <div class="tags"><span class="tag">gig</span><span class="tag hint">Оформление на бирже фриланса</span></div>
-
-  <a class="cta gig" href="https://t.me" target="_blank" rel="noopener">Заказать →</a>
-</article></div>
-</section><section class="cat-section" data-cat-group="seo-статьи">
-  <h2 class="category">SEO-статьи</h2>
-  <div class="grid"><article class="card" data-cat="seo-статьи">
+<section class="cat-section" data-cat-group="seo-статьи"><h2 class="category">SEO-статьи</h2><div class="grid"><article class="card" data-code="SEO-ART-01" data-cat="seo-статьи" data-route="gig">
   <div class="cat">SEO-статьи</div>
   <h3 data-ru="SEO-статья под ключ" data-en="SEO article writing">SEO-статья под ключ</h3>
+  <div class="en">SEO article writing</div>
   <div class="price">$19 / статья</div>
-  <div class="tags"><span class="tag">gig</span><span class="tag hint">Оформление на бирже фриланса</span></div>
-
-  <a class="cta gig" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заказать →</a>
-</article><article class="card" data-cat="seo-статьи">
+  <div class="tags"><span class="tag">гиг на бирже</span><span class="tag hint">Оформление на бирже фриланса</span></div>
+  
+  <button class="cta brief" onclick="openForm('SEO-ART-01')">Заполнить бриф</button>
+</article><article class="card" data-code="SEO-ART-05" data-cat="seo-статьи" data-route="gig">
   <div class="cat">SEO-статьи</div>
   <h3 data-ru="Пакет SEO-статей (5)" data-en="SEO articles (5)">Пакет SEO-статей (5)</h3>
+  <div class="en">SEO articles (5)</div>
   <div class="price">$79 / 5</div>
-  <div class="tags"><span class="tag">gig</span><span class="tag hint">Оформление на бирже фриланса</span></div>
-
-  <a class="cta gig" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заказать →</a>
-</article><article class="card" data-cat="seo-статьи">
+  <div class="tags"><span class="tag">гиг на бирже</span><span class="tag hint">Оформление на бирже фриланса</span></div>
+  
+  <button class="cta brief" onclick="openForm('SEO-ART-05')">Заполнить бриф</button>
+</article><article class="card" data-code="SEO-ART-10" data-cat="seo-статьи" data-route="gig">
   <div class="cat">SEO-статьи</div>
   <h3 data-ru="Пакет SEO-статей (10)" data-en="SEO articles (10)">Пакет SEO-статей (10)</h3>
+  <div class="en">SEO articles (10)</div>
   <div class="price">$149 / 10</div>
-  <div class="tags"><span class="tag">gig</span><span class="tag hint">Оформление на бирже фриланса</span></div>
-
-  <a class="cta gig" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заказать →</a>
+  <div class="tags"><span class="tag">гиг на бирже</span><span class="tag hint">Оформление на бирже фриланса</span></div>
+  
+  <button class="cta brief" onclick="openForm('SEO-ART-10')">Заполнить бриф</button>
 </article></div>
-</section><section class="cat-section" data-cat-group="короткие видео / reels">
-  <h2 class="category">Короткие видео / Reels</h2>
-  <div class="grid"><article class="card" data-cat="короткие видео / reels">
-  <div class="cat">Короткие видео / Reels</div>
-  <h3 data-ru="1 Reels/Short" data-en="1 short video">1 Reels/Short</h3>
-  <div class="price">$29 / ролик</div>
-  <div class="tags"><span class="tag">gig</span><span class="tag hint">Оформление на бирже фриланса</span></div>
-
-  <a class="cta gig" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заказать →</a>
-</article><article class="card" data-cat="короткие видео / reels">
-  <div class="cat">Короткие видео / Reels</div>
-  <h3 data-ru="Пакет 10 коротких видео" data-en="10 short videos">Пакет 10 коротких видео</h3>
-  <div class="price">$249 / 10</div>
-  <div class="tags"><span class="tag">gig</span><span class="tag hint">Оформление на бирже фриланса</span></div>
-
-  <a class="cta gig" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заказать →</a>
-</article></div>
-</section><section class="cat-section" data-cat-group="оформление профилей">
-  <h2 class="category">Оформление профилей</h2>
-  <div class="grid"><article class="card" data-cat="оформление профилей">
-  <div class="cat">Оформление профилей</div>
-  <h3 data-ru="Оформление профиля соцсети" data-en="Social profile setup">Оформление профиля соцсети</h3>
-  <div class="price">$79 / профиль</div>
-  <div class="tags"><span class="tag">gig</span><span class="tag hint">Оформление на бирже фриланса</span></div>
-
-  <a class="cta gig" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заказать →</a>
-</article></div>
-</section><section class="cat-section" data-cat-group="контент-стратегия">
-  <h2 class="category">Контент-стратегия</h2>
-  <div class="grid"><article class="card" data-cat="контент-стратегия">
-  <div class="cat">Контент-стратегия</div>
-  <h3 data-ru="Контент-стратегия и ведение" data-en="Content strategy &amp; retainer">Контент-стратегия и ведение</h3>
-  <div class="price">$499 / мес</div>
-  <div class="tags"><span class="tag">brief</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
-
-  <a class="cta brief" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Заполнить бриф →</a>
-</article></div>
-</section><section class="cat-section" data-cat-group="engagement-буст">
-  <h2 class="category">Engagement-буст</h2>
-  <div class="grid"><article class="card" data-cat="engagement-буст">
-  <div class="cat">Engagement-буст</div>
-  <h3 data-ru="Engagement-буст для аккаунта" data-en="Engagement boost">Engagement-буст для аккаунта</h3>
-  <div class="price">$49 / пакет</div>
-  <div class="tags"><span class="tag">escalate</span><span class="tag hint">Индивидуальный проект / под ключ</span></div>
-
-  <div class="disclaimer">⚠️ Честный disclaimer: рост вовлечённости без гарантий виральности; следуем правилам площадок; риски блокировки профиля клиент принимает на себя.</div>
-  <a class="cta escalate" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Связаться →</a>
-</article></div>
-</section><section class="cat-section" data-cat-group="seo продвижение">
-  <h2 class="category">SEO продвижение</h2>
-  <div class="grid"><article class="card" data-cat="seo продвижение">
+<div class="brief-form" id="form-SEO-ART-01">
+  <h4>Бриф: SEO-статья под ключ</h4>
+  <input type="text" id="name-SEO-ART-01" placeholder="Ваше имя">
+  <input type="email" id="email-SEO-ART-01" placeholder="Email (обязательно)">
+  <textarea id="scope-SEO-ART-01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-SEO-ART-01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('SEO-ART-01', 'SEO-статья под ключ', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-SEO-ART-05">
+  <h4>Бриф: Пакет SEO-статей (5)</h4>
+  <input type="text" id="name-SEO-ART-05" placeholder="Ваше имя">
+  <input type="email" id="email-SEO-ART-05" placeholder="Email (обязательно)">
+  <textarea id="scope-SEO-ART-05" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-SEO-ART-05"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('SEO-ART-05', 'Пакет SEO-статей (5)', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-SEO-ART-10">
+  <h4>Бриф: Пакет SEO-статей (10)</h4>
+  <input type="text" id="name-SEO-ART-10" placeholder="Ваше имя">
+  <input type="email" id="email-SEO-ART-10" placeholder="Email (обязательно)">
+  <textarea id="scope-SEO-ART-10" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-SEO-ART-10"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('SEO-ART-10', 'Пакет SEO-статей (10)', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="seo продвижение"><h2 class="category">SEO продвижение</h2><div class="grid"><article class="card" data-code="SEA-HIGH" data-cat="seo продвижение" data-route="contact">
   <div class="cat">SEO продвижение</div>
   <h3 data-ru="SEO-продвижение сайта в Яндексе/Google — вывод в топ" data-en="SEO ranking service (Yandex/Google) to top">SEO-продвижение сайта в Яндексе/Google — вывод в топ</h3>
+  <div class="en">SEO ranking service (Yandex/Google) to top</div>
   <div class="price">$1199 / мес</div>
-  <div class="tags"><span class="tag">contact</span><span class="tag hint">Связаться с нами для расчёта</span></div>
-
-  <a class="cta escalate" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Связаться →</a>
+  <div class="tags"><span class="tag">связаться для расчёта</span><span class="tag hint">Связаться с нами для расчёта</span></div>
+  
+  <button class="cta escalate" onclick="openForm('SEA-HIGH')">Связаться для расчёта</button>
 </article></div>
-</section><section class="cat-section" data-cat-group="ai автоматизация">
-  <h2 class="category">AI автоматизация</h2>
-  <div class="grid"><article class="card" data-cat="ai автоматизация">
+<div class="brief-form" id="form-SEA-HIGH">
+  <h4>Бриф: SEO-продвижение сайта в Яндексе/Google — вывод в топ</h4>
+  <input type="text" id="name-SEA-HIGH" placeholder="Ваше имя">
+  <input type="email" id="email-SEA-HIGH" placeholder="Email (обязательно)">
+  <textarea id="scope-SEA-HIGH" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-SEA-HIGH"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('SEA-HIGH', 'SEO-продвижение сайта в Яндексе/Google — вывод в топ', 'contact')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="разработка"><h2 class="category">Разработка</h2><div class="grid"><article class="card" data-code="WEB01" data-cat="разработка" data-route="brief">
+  <div class="cat">Разработка</div>
+  <h3 data-ru="Продающий лендинг" data-en="Landing Page">Продающий лендинг</h3>
+  <div class="en">Landing Page</div>
+  <div class="price">от $49</div>
+  <div class="tags"><span class="tag">кастом / КП</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
+  
+  <button class="cta brief" onclick="openForm('WEB01')">Заполнить бриф</button>
+</article><article class="card" data-code="WEB-01" data-cat="разработка" data-route="brief">
+  <div class="cat">Разработка</div>
+  <h3 data-ru="Продающий лендинг" data-en="High-converting landing">Продающий лендинг</h3>
+  <div class="en">High-converting landing</div>
+  <div class="price">$499 / проект</div>
+  <div class="tags"><span class="tag">кастом / КП</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
+  
+  <button class="cta brief" onclick="openForm('WEB-01')">Заполнить бриф</button>
+</article><article class="card" data-code="WEB-02" data-cat="разработка" data-route="escalate">
+  <div class="cat">Разработка</div>
+  <h3 data-ru="Корпоративный сайт / сайт услуг" data-en="Business website">Корпоративный сайт / сайт услуг</h3>
+  <div class="en">Business website</div>
+  <div class="price">$899 / проект</div>
+  <div class="tags"><span class="tag">владелец / созвон</span><span class="tag hint">Индивидуальный проект / под ключ</span></div>
+  
+  <button class="cta escalate" onclick="openForm('WEB-02')">Связаться с владельцем</button>
+</article></div>
+<div class="brief-form" id="form-WEB01">
+  <h4>Бриф: Продающий лендинг</h4>
+  <input type="text" id="name-WEB01" placeholder="Ваше имя">
+  <input type="email" id="email-WEB01" placeholder="Email (обязательно)">
+  <textarea id="scope-WEB01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-WEB01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('WEB01', 'Продающий лендинг', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-WEB-01">
+  <h4>Бриф: Продающий лендинг</h4>
+  <input type="text" id="name-WEB-01" placeholder="Ваше имя">
+  <input type="email" id="email-WEB-01" placeholder="Email (обязательно)">
+  <textarea id="scope-WEB-01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-WEB-01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('WEB-01', 'Продающий лендинг', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-WEB-02">
+  <h4>Бриф: Корпоративный сайт / сайт услуг</h4>
+  <input type="text" id="name-WEB-02" placeholder="Ваше имя">
+  <input type="email" id="email-WEB-02" placeholder="Email (обязательно)">
+  <textarea id="scope-WEB-02" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-WEB-02"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('WEB-02', 'Корпоративный сайт / сайт услуг', 'escalate')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="автоматизация"><h2 class="category">Автоматизация</h2><div class="grid"><article class="card" data-code="AUT01" data-cat="автоматизация" data-route="brief">
+  <div class="cat">Автоматизация</div>
+  <h3 data-ru="Автоматизация n8n" data-en="n8n Automation">Автоматизация n8n</h3>
+  <div class="en">n8n Automation</div>
+  <div class="price">от $25</div>
+  <div class="tags"><span class="tag">кастом / КП</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
+  
+  <button class="cta brief" onclick="openForm('AUT01')">Заполнить бриф</button>
+</article><article class="card" data-code="AUTO-01" data-cat="автоматизация" data-route="brief">
+  <div class="cat">Автоматизация</div>
+  <h3 data-ru="n8n-автоматизация под бизнес" data-en="n8n workflow automation">n8n-автоматизация под бизнес</h3>
+  <div class="en">n8n workflow automation</div>
+  <div class="price">$299 / проект</div>
+  <div class="tags"><span class="tag">кастом / КП</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
+  
+  <button class="cta brief" onclick="openForm('AUTO-01')">Заполнить бриф</button>
+</article><article class="card" data-code="AUTO-02" data-cat="автоматизация" data-route="brief">
+  <div class="cat">Автоматизация</div>
+  <h3 data-ru="Telegram-бот для бизнеса" data-en="Telegram chatbot">Telegram-бот для бизнеса</h3>
+  <div class="en">Telegram chatbot</div>
+  <div class="price">$399 / проект</div>
+  <div class="tags"><span class="tag">кастом / КП</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
+  
+  <button class="cta brief" onclick="openForm('AUTO-02')">Заполнить бриф</button>
+</article><article class="card" data-code="AUTO-03" data-cat="автоматизация" data-route="brief">
+  <div class="cat">Автоматизация</div>
+  <h3 data-ru="Автопостинг контента" data-en="Auto content posting">Автопостинг контента</h3>
+  <div class="en">Auto content posting</div>
+  <div class="price">$199 / проект</div>
+  <div class="tags"><span class="tag">кастом / КП</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
+  
+  <button class="cta brief" onclick="openForm('AUTO-03')">Заполнить бриф</button>
+</article><article class="card" data-code="AUTO-04" data-cat="автоматизация" data-route="brief">
+  <div class="cat">Автоматизация</div>
+  <h3 data-ru="Парсинг данных в таблицы" data-en="Data scraping/parsing">Парсинг данных в таблицы</h3>
+  <div class="en">Data scraping/parsing</div>
+  <div class="price">$249 / проект</div>
+  <div class="tags"><span class="tag">кастом / КП</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
+  
+  <button class="cta brief" onclick="openForm('AUTO-04')">Заполнить бриф</button>
+</article><article class="card" data-code="AUTO-06" data-cat="автоматизация" data-route="escalate">
+  <div class="cat">Автоматизация</div>
+  <h3 data-ru="AI-агент под ключ" data-en="Custom AI agent">AI-агент под ключ</h3>
+  <div class="en">Custom AI agent</div>
+  <div class="price">$599 / проект</div>
+  <div class="tags"><span class="tag">владелец / созвон</span><span class="tag hint">Индивидуальный проект / под ключ</span></div>
+  
+  <button class="cta escalate" onclick="openForm('AUTO-06')">Связаться с владельцем</button>
+</article></div>
+<div class="brief-form" id="form-AUT01">
+  <h4>Бриф: Автоматизация n8n</h4>
+  <input type="text" id="name-AUT01" placeholder="Ваше имя">
+  <input type="email" id="email-AUT01" placeholder="Email (обязательно)">
+  <textarea id="scope-AUT01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-AUT01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('AUT01', 'Автоматизация n8n', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-AUTO-01">
+  <h4>Бриф: n8n-автоматизация под бизнес</h4>
+  <input type="text" id="name-AUTO-01" placeholder="Ваше имя">
+  <input type="email" id="email-AUTO-01" placeholder="Email (обязательно)">
+  <textarea id="scope-AUTO-01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-AUTO-01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('AUTO-01', 'n8n-автоматизация под бизнес', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-AUTO-02">
+  <h4>Бриф: Telegram-бот для бизнеса</h4>
+  <input type="text" id="name-AUTO-02" placeholder="Ваше имя">
+  <input type="email" id="email-AUTO-02" placeholder="Email (обязательно)">
+  <textarea id="scope-AUTO-02" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-AUTO-02"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('AUTO-02', 'Telegram-бот для бизнеса', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-AUTO-03">
+  <h4>Бриф: Автопостинг контента</h4>
+  <input type="text" id="name-AUTO-03" placeholder="Ваше имя">
+  <input type="email" id="email-AUTO-03" placeholder="Email (обязательно)">
+  <textarea id="scope-AUTO-03" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-AUTO-03"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('AUTO-03', 'Автопостинг контента', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-AUTO-04">
+  <h4>Бриф: Парсинг данных в таблицы</h4>
+  <input type="text" id="name-AUTO-04" placeholder="Ваше имя">
+  <input type="email" id="email-AUTO-04" placeholder="Email (обязательно)">
+  <textarea id="scope-AUTO-04" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-AUTO-04"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('AUTO-04', 'Парсинг данных в таблицы', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-AUTO-06">
+  <h4>Бриф: AI-агент под ключ</h4>
+  <input type="text" id="name-AUTO-06" placeholder="Ваше имя">
+  <input type="email" id="email-AUTO-06" placeholder="Email (обязательно)">
+  <textarea id="scope-AUTO-06" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-AUTO-06"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('AUTO-06', 'AI-агент под ключ', 'escalate')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="короткие видео / reels"><h2 class="category">Короткие видео / Reels</h2><div class="grid"><article class="card" data-code="VID-01" data-cat="короткие видео / reels" data-route="gig">
+  <div class="cat">Короткие видео / Reels</div>
+  <h3 data-ru="1 Reels/Short" data-en="1 short video">1 Reels/Short</h3>
+  <div class="en">1 short video</div>
+  <div class="price">$29 / ролик</div>
+  <div class="tags"><span class="tag">гиг на бирже</span><span class="tag hint">Оформление на бирже фриланса</span></div>
+  
+  <button class="cta brief" onclick="openForm('VID-01')">Заполнить бриф</button>
+</article><article class="card" data-code="VID-10" data-cat="короткие видео / reels" data-route="gig">
+  <div class="cat">Короткие видео / Reels</div>
+  <h3 data-ru="Пакет 10 коротких видео" data-en="10 short videos">Пакет 10 коротких видео</h3>
+  <div class="en">10 short videos</div>
+  <div class="price">$249 / 10</div>
+  <div class="tags"><span class="tag">гиг на бирже</span><span class="tag hint">Оформление на бирже фриланса</span></div>
+  
+  <button class="cta brief" onclick="openForm('VID-10')">Заполнить бриф</button>
+</article></div>
+<div class="brief-form" id="form-VID-01">
+  <h4>Бриф: 1 Reels/Short</h4>
+  <input type="text" id="name-VID-01" placeholder="Ваше имя">
+  <input type="email" id="email-VID-01" placeholder="Email (обязательно)">
+  <textarea id="scope-VID-01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-VID-01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('VID-01', '1 Reels/Short', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div>
+<div class="brief-form" id="form-VID-10">
+  <h4>Бриф: Пакет 10 коротких видео</h4>
+  <input type="text" id="name-VID-10" placeholder="Ваше имя">
+  <input type="email" id="email-VID-10" placeholder="Email (обязательно)">
+  <textarea id="scope-VID-10" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-VID-10"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('VID-10', 'Пакет 10 коротких видео', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="оформление профилей"><h2 class="category">Оформление профилей</h2><div class="grid"><article class="card" data-code="PROF-01" data-cat="оформление профилей" data-route="gig">
+  <div class="cat">Оформление профилей</div>
+  <h3 data-ru="Оформление профиля соцсети" data-en="Social profile setup">Оформление профиля соцсети</h3>
+  <div class="en">Social profile setup</div>
+  <div class="price">$79 / профиль</div>
+  <div class="tags"><span class="tag">гиг на бирже</span><span class="tag hint">Оформление на бирже фриланса</span></div>
+  
+  <button class="cta brief" onclick="openForm('PROF-01')">Заполнить бриф</button>
+</article></div>
+<div class="brief-form" id="form-PROF-01">
+  <h4>Бриф: Оформление профиля соцсети</h4>
+  <input type="text" id="name-PROF-01" placeholder="Ваше имя">
+  <input type="email" id="email-PROF-01" placeholder="Email (обязательно)">
+  <textarea id="scope-PROF-01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-PROF-01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('PROF-01', 'Оформление профиля соцсети', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="контент-стратегия"><h2 class="category">Контент-стратегия</h2><div class="grid"><article class="card" data-code="CONTENT-STRAT-01" data-cat="контент-стратегия" data-route="brief">
+  <div class="cat">Контент-стратегия</div>
+  <h3 data-ru="Контент-стратегия и ведение" data-en="Content strategy &amp; retainer">Контент-стратегия и ведение</h3>
+  <div class="en">Content strategy &amp; retainer</div>
+  <div class="price">$499 / мес</div>
+  <div class="tags"><span class="tag">кастом / КП</span><span class="tag hint">Заполнить бриф — рассчитаем за 1 день</span></div>
+  
+  <button class="cta brief" onclick="openForm('CONTENT-STRAT-01')">Заполнить бриф</button>
+</article></div>
+<div class="brief-form" id="form-CONTENT-STRAT-01">
+  <h4>Бриф: Контент-стратегия и ведение</h4>
+  <input type="text" id="name-CONTENT-STRAT-01" placeholder="Ваше имя">
+  <input type="email" id="email-CONTENT-STRAT-01" placeholder="Email (обязательно)">
+  <textarea id="scope-CONTENT-STRAT-01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-CONTENT-STRAT-01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('CONTENT-STRAT-01', 'Контент-стратегия и ведение', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="engagement-буст"><h2 class="category">Engagement-буст</h2><div class="grid"><article class="card" data-code="ENG-01" data-cat="engagement-буст" data-route="escalate">
+  <div class="cat">Engagement-буст</div>
+  <h3 data-ru="Engagement-буст для аккаунта" data-en="Engagement boost">Engagement-буст для аккаунта</h3>
+  <div class="en">Engagement boost</div>
+  <div class="price">$49 / пакет</div>
+  <div class="tags"><span class="tag">владелец / созвон</span><span class="tag hint">Индивидуальный проект / под ключ</span></div>
+  <div class="disclaimer">⚠️ Честный disclaimer: рост вовлечённости без гарантий виральности; следуем правилам площадок; риски блокировки профиля клиент принимает на себя.</div>
+  <button class="cta escalate" onclick="openForm('ENG-01')">Связаться с владельцем</button>
+</article></div>
+<div class="brief-form" id="form-ENG-01">
+  <h4>Бриф: Engagement-буст для аккаунта</h4>
+  <input type="text" id="name-ENG-01" placeholder="Ваше имя">
+  <input type="email" id="email-ENG-01" placeholder="Email (обязательно)">
+  <textarea id="scope-ENG-01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-ENG-01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('ENG-01', 'Engagement-буст для аккаунта', 'escalate')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="seo"><h2 class="category">SEO</h2><div class="grid"><article class="card" data-code="SEA01" data-cat="seo" data-route="gig">
+  <div class="cat">SEO</div>
+  <h3 data-ru="SEO-статья" data-en="SEO Article">SEO-статья</h3>
+  <div class="en">SEO Article</div>
+  <div class="price">$12</div>
+  <div class="tags"><span class="tag">гиг на бирже</span><span class="tag hint">Оформление на бирже фриланса</span></div>
+  
+  <a class="cta" href="https://kwork.ru?utm=utm_source%3Dsite%26utm_medium%3Dcatalog%26utm_campaign%3Dseo_article" target="_blank" rel="noopener">Заказать на бирже</a>
+</article></div>
+<div class="brief-form" id="form-SEA01">
+  <h4>Бриф: SEO-статья</h4>
+  <input type="text" id="name-SEA01" placeholder="Ваше имя">
+  <input type="email" id="email-SEA01" placeholder="Email (обязательно)">
+  <textarea id="scope-SEA01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-SEA01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('SEA01', 'SEO-статья', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="контент"><h2 class="category">Контент</h2><div class="grid"><article class="card" data-code="CTN01" data-cat="контент" data-route="gig">
+  <div class="cat">Контент</div>
+  <h3 data-ru="Короткие видео/Reels" data-en="Reels">Короткие видео/Reels</h3>
+  <div class="en">Reels</div>
+  <div class="price">$18</div>
+  <div class="tags"><span class="tag">гиг на бирже</span><span class="tag hint">Оформление на бирже фриланса</span></div>
+  
+  <a class="cta" href="https://www.freelancer.com?utm=utm_source%3Dsite%26utm_medium%3Dcatalog%26utm_campaign%3Dreels" target="_blank" rel="noopener">Заказать на бирже</a>
+</article></div>
+<div class="brief-form" id="form-CTN01">
+  <h4>Бриф: Короткие видео/Reels</h4>
+  <input type="text" id="name-CTN01" placeholder="Ваше имя">
+  <input type="email" id="email-CTN01" placeholder="Email (обязательно)">
+  <textarea id="scope-CTN01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-CTN01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('CTN01', 'Короткие видео/Reels', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="продвижение"><h2 class="category">Продвижение</h2><div class="grid"><article class="card" data-code="ENG01" data-cat="продвижение" data-route="gig">
+  <div class="cat">Продвижение</div>
+  <h3 data-ru="Engagement-буст" data-en="Engagement Boost">Engagement-буст</h3>
+  <div class="en">Engagement Boost</div>
+  <div class="price">$10</div>
+  <div class="tags"><span class="tag">гиг на бирже</span><span class="tag hint">Оформление на бирже фриланса</span></div>
+  
+  <a class="cta" href="https://t.me?utm=utm_source%3Dsite%26utm_medium%3Dcatalog%26utm_campaign%3Dengagement" target="_blank" rel="noopener">Заказать на бирже</a>
+</article></div>
+<div class="brief-form" id="form-ENG01">
+  <h4>Бриф: Engagement-буст</h4>
+  <input type="text" id="name-ENG01" placeholder="Ваше имя">
+  <input type="email" id="email-ENG01" placeholder="Email (обязательно)">
+  <textarea id="scope-ENG01" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-ENG01"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('ENG01', 'Engagement-буст', 'brief')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section><section class="cat-section" data-cat-group="ai автоматизация"><h2 class="category">AI автоматизация</h2><div class="grid"><article class="card" data-code="AIA-HIGH" data-cat="ai автоматизация" data-route="contact">
   <div class="cat">AI автоматизация</div>
   <h3 data-ru="AI-агент / автоматизация бизнеса под ключ (внедрение)" data-en="Full AI agent &amp; automation deployment">AI-агент / автоматизация бизнеса под ключ (внедрение)</h3>
+  <div class="en">Full AI agent &amp; automation deployment</div>
   <div class="price">$999 / проект</div>
-  <div class="tags"><span class="tag">contact</span><span class="tag hint">Связаться с нами для расчёта</span></div>
-
-  <a class="cta escalate" href="https://toptoday.pw/site-catalog.html" target="_blank" rel="noopener">Связаться →</a>
+  <div class="tags"><span class="tag">связаться для расчёта</span><span class="tag hint">Связаться с нами для расчёта</span></div>
+  
+  <button class="cta escalate" onclick="openForm('AIA-HIGH')">Связаться для расчёта</button>
 </article></div>
-</section>
+<div class="brief-form" id="form-AIA-HIGH">
+  <h4>Бриф: AI-агент / автоматизация бизнеса под ключ (внедрение)</h4>
+  <input type="text" id="name-AIA-HIGH" placeholder="Ваше имя">
+  <input type="email" id="email-AIA-HIGH" placeholder="Email (обязательно)">
+  <textarea id="scope-AIA-HIGH" rows="3" placeholder="Опишите задачу / объём / бюджет"></textarea>
+  <label><input type="checkbox" id="call-AIA-HIGH"> Нужен созвон / проект сложный / бюджет высокий</label>
+  <button class="cta" onclick="submitForm('AIA-HIGH', 'AI-агент / автоматизация бизнеса под ключ (внедрение)', 'contact')">Отправить бриф</button>
+  <div class="note">Отправка на реальную заявку TopToDayAI (https://toptoday.pw/api/order) — менеджер свяжется для подготовки КП.</div>
+</div></section>
 </main>
-<div class="empty" id="empty">Ничего не найдено. Попробуйте изменить запрос.</div>
+<div class="empty" id="empty">Ничего не найдено. Попробуйте изменить запрос или сбросить фильтр.</div>
 <footer>
-  <p>© 2026 TopToDayAI Co. · Каталог v2 · Источник данных: NocoDB services_website_catalog (22 услуг).</p>
-  <p style="margin-top:6px">Оплата: PayPal · NowPayments · USDT · Lava. Stripe запрещён распоряжением Ивана (05.08.2026).</p>
+  <div class="container">
+    <p>© 2026 TopToDayAI Co. · Каталог услуг v2 · Источник данных: NocoDB <code>services_website_catalog</code> · Правки в NocoDB → страница пересобирается.</p>
+    <p style="margin-top:6px">Оплата: PayPal · NowPayments · USDT · Lava · Оплата по счёту для юрлиц.</p>
+  </div>
 </footer>
 </div>
+<div id="toast"></div>
 <script>
-const SERVICES = [{"c": "SEO", "r": "SEO-статья", "e": "SEO Article", "p": "$12", "route": "gig"}, {"c": "Автоматизация", "r": "Автоматизация n8n", "e": "n8n Automation", "p": "от $25", "route": "brief"}, {"c": "Автоматизация", "r": "n8n-автоматизация под бизнес", "e": "n8n workflow automation", "p": "$299 / проект", "route": "brief"}, {"c": "Автоматизация", "r": "Telegram-бот для бизнеса", "e": "Telegram chatbot", "p": "$399 / проект", "route": "brief"}, {"c": "Автоматизация", "r": "Автопостинг контента", "e": "Auto content posting", "p": "$199 / проект", "route": "brief"}, {"c": "Автоматизация", "r": "Парсинг данных в таблицы", "e": "Data scraping/parsing", "p": "$249 / проект", "route": "brief"}, {"c": "Автоматизация", "r": "AI-агент под ключ", "e": "Custom AI agent", "p": "$599 / проект", "route": "escalate"}, {"c": "Разработка", "r": "Продающий лендинг", "e": "Landing Page", "p": "от $49", "route": "brief"}, {"c": "Разработка", "r": "Продающий лендинг", "e": "High-converting landing", "p": "$499 / проект", "route": "brief"}, {"c": "Разработка", "r": "Корпоративный сайт / сайт услуг", "e": "Business website", "p": "$899 / проект", "route": "escalate"}, {"c": "Контент", "r": "Короткие видео/Reels", "e": "Reels", "p": "$18", "route": "gig"}, {"c": "Продвижение", "r": "Engagement-буст", "e": "Engagement Boost", "p": "$10", "route": "gig"}, {"c": "SEO-статьи", "r": "SEO-статья под ключ", "e": "SEO article writing", "p": "$19 / статья", "route": "gig"}, {"c": "SEO-статьи", "r": "Пакет SEO-статей (5)", "e": "SEO articles (5)", "p": "$79 / 5", "route": "gig"}, {"c": "SEO-статьи", "r": "Пакет SEO-статей (10)", "e": "SEO articles (10)", "p": "$149 / 10", "route": "gig"}, {"c": "Короткие видео / Reels", "r": "1 Reels/Short", "e": "1 short video", "p": "$29 / ролик", "route": "gig"}, {"c": "Короткие видео / Reels", "r": "Пакет 10 коротких видео", "e": "10 short videos", "p": "$249 / 10", "route": "gig"}, {"c": "Оформление профилей", "r": "Оформление профиля соцсети", "e": "Social profile setup", "p": "$79 / профиль", "route": "gig"}, {"c": "Контент-стратегия", "r": "Контент-стратегия и ведение", "e": "Content strategy & retainer", "p": "$499 / мес", "route": "brief"}, {"c": "Engagement-буст", "r": "Engagement-буст для аккаунта", "e": "Engagement boost", "p": "$49 / пакет", "route": "escalate"}, {"c": "SEO продвижение", "r": "SEO-продвижение сайта в Яндексе/Google — вывод в топ", "e": "SEO ranking service (Yandex/Google) to top", "p": "$1199 / мес", "route": "contact"}, {"c": "AI автоматизация", "r": "AI-агент / автоматизация бизнеса под ключ (внедрение)", "e": "Full AI agent & automation deployment", "p": "$999 / проект", "route": "contact"}];
+const SERVICES = [{"c": "SEO-статьи", "r": "SEO-статья под ключ", "e": "SEO article writing", "p": "$19 / статья", "route": "gig"}, {"c": "SEO-статьи", "r": "Пакет SEO-статей (5)", "e": "SEO articles (5)", "p": "$79 / 5", "route": "gig"}, {"c": "SEO-статьи", "r": "Пакет SEO-статей (10)", "e": "SEO articles (10)", "p": "$149 / 10", "route": "gig"}, {"c": "Короткие видео / Reels", "r": "1 Reels/Short", "e": "1 short video", "p": "$29 / ролик", "route": "gig"}, {"c": "Короткие видео / Reels", "r": "Пакет 10 коротких видео", "e": "10 short videos", "p": "$249 / 10", "route": "gig"}, {"c": "Оформление профилей", "r": "Оформление профиля соцсети", "e": "Social profile setup", "p": "$79 / профиль", "route": "gig"}, {"c": "Контент-стратегия", "r": "Контент-стратегия и ведение", "e": "Content strategy & retainer", "p": "$499 / мес", "route": "brief"}, {"c": "Автоматизация", "r": "n8n-автоматизация под бизнес", "e": "n8n workflow automation", "p": "$299 / проект", "route": "brief"}, {"c": "Автоматизация", "r": "Telegram-бот для бизнеса", "e": "Telegram chatbot", "p": "$399 / проект", "route": "brief"}, {"c": "Автоматизация", "r": "Автопостинг контента", "e": "Auto content posting", "p": "$199 / проект", "route": "brief"}, {"c": "Автоматизация", "r": "Парсинг данных в таблицы", "e": "Data scraping/parsing", "p": "$249 / проект", "route": "brief"}, {"c": "Автоматизация", "r": "AI-агент под ключ", "e": "Custom AI agent", "p": "$599 / проект", "route": "escalate"}, {"c": "Разработка", "r": "Продающий лендинг", "e": "High-converting landing", "p": "$499 / проект", "route": "brief"}, {"c": "Разработка", "r": "Корпоративный сайт / сайт услуг", "e": "Business website", "p": "$899 / проект", "route": "escalate"}, {"c": "Engagement-буст", "r": "Engagement-буст для аккаунта", "e": "Engagement boost", "p": "$49 / пакет", "route": "escalate"}, {"c": "SEO", "r": "SEO-статья", "e": "SEO Article", "p": "$12", "route": "gig"}, {"c": "Автоматизация", "r": "Автоматизация n8n", "e": "n8n Automation", "p": "от $25", "route": "brief"}, {"c": "Разработка", "r": "Продающий лендинг", "e": "Landing Page", "p": "от $49", "route": "brief"}, {"c": "Контент", "r": "Короткие видео/Reels", "e": "Reels", "p": "$18", "route": "gig"}, {"c": "Продвижение", "r": "Engagement-буст", "e": "Engagement Boost", "p": "$10", "route": "gig"}, {"c": "SEO продвижение", "r": "SEO-продвижение сайта в Яндексе/Google — вывод в топ", "e": "SEO ranking service (Yandex/Google) to top", "p": "$1199 / мес", "route": "contact"}, {"c": "AI автоматизация", "r": "AI-агент / автоматизация бизнеса под ключ (внедрение)", "e": "Full AI agent & automation deployment", "p": "$999 / проект", "route": "contact"}];
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(function(){t.style.display='none';},6000);}
 function setLang(l){
-  document.querySelectorAll('.card').forEach(c=>{
-    const h=c.querySelector('h3');
-    if(h) h.textContent = l==='en' ? (h.dataset.en||h.dataset.ru) : h.dataset.ru;
+  document.querySelectorAll('.card').forEach(function(c){
+    var h=c.querySelector('h3');if(!h)return;
+    h.textContent = l==='en' ? (h.dataset.en||h.dataset.ru) : h.dataset.ru;
   });
-  document.querySelectorAll('.lang a').forEach(a=>a.classList.toggle('active', a.dataset.lang===l));
+  document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('active', b.dataset.lang===l);});
 }
-document.querySelectorAll('.lang a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();setLang(a.dataset.lang);}));
+document.querySelectorAll('.lang button').forEach(function(b){
+  b.addEventListener('click', function(e){ e.preventDefault(); setLang(b.dataset.lang); });
+});
+function openForm(code){
+  var f=document.getElementById('form-'+code);
+  document.querySelectorAll('.brief-form').forEach(function(x){ if(x!==f) x.classList.remove('open'); });
+  f.classList.toggle('open');
+  if(f.classList.contains('open')) f.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function submitForm(code,title,route){
+  var name=document.getElementById('name-'+code).value.trim();
+  var email=document.getElementById('email-'+code).value.trim();
+  var scope=document.getElementById('scope-'+code).value.trim();
+  var needCall=document.getElementById('call-'+code).checked;
+  if(!email||email.indexOf('@')<1){toast('Введите корректный email');return;}
+  var payload={product:code,title:title,name:name,email:email,scope:scope,need_call:needCall,
+    routing:(needCall?'escalate':(route||'brief')),source:'site_catalog_v2',utm:code,time:new Date().toISOString()};
+  fetch('https://toptoday.pw/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+   .then(function(r){return r.json();})
+   .then(function(d){
+     if(d && d.order_id){toast('✅ Бриф получен #'+d.order_id+(needCall?' (эскалация к владельцу)':'. Менеджер свяжется для подготовки КП.'));}
+     else{toast('Ошибка: '+JSON.stringify(d));}
+   })
+   .catch(function(e){toast('Бриф не отправлен (сеть): '+e);});
+}
 function apply(){
-  const q=(document.getElementById('q').value||'').trim().toLowerCase();
-  const f=document.querySelector('.fbtn.active').dataset.f;
-  let visible=0;
-  document.querySelectorAll('.card').forEach(c=>{
-    const matchF = f==='all' || c.dataset.cat===f;
-    const hay=(c.textContent||'').toLowerCase();
-    const matchQ = !q || hay.includes(q);
-    c.style.display = (matchF&&matchQ) ? '' : 'none';
-    if(matchF&&matchQ) visible++;
+  var q=(document.getElementById('q').value||'').trim().toLowerCase();
+  var f=document.querySelector('.fbtn.active').dataset.f;
+  var visible=0;
+  document.querySelectorAll('.card').forEach(function(c){
+    var matchF = f==='all' || c.dataset.cat===f;
+    var hay=(c.textContent||'').toLowerCase();
+    var matchQ = !q || hay.indexOf(q)>-1;
+    var show = matchF&&matchQ; c.style.display = show ? '' : 'none';
+    if(show) visible++;
   });
-  document.querySelectorAll('.cat-section').forEach(s=>{
-    const any = Array.from(s.querySelectorAll('.card')).some(c=>c.style.display!=='none');
+  document.querySelectorAll('.cat-section').forEach(function(s){
+    var any=Array.prototype.some.call(s.querySelectorAll('.card'), function(c){return c.style.display!=='none';});
     s.style.display = any ? '' : 'none';
   });
   document.getElementById('empty').style.display = visible===0 ? 'block' : 'none';
 }
 document.getElementById('q').addEventListener('input', apply);
-document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); apply();
-}));
+document.querySelectorAll('.fbtn').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('active');});
+    b.classList.add('active'); apply();
+  });
+});
 </script>
 </body>
 </html>
